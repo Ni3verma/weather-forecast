@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.nitin.weather.R
+import com.nitin.weather.data.ApixuWeatherApiService
 
 class CurrentWeatherFragment : Fragment() {
 
@@ -27,6 +28,8 @@ class CurrentWeatherFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(CurrentWeatherViewModel::class.java)
         // TODO: Use the ViewModel
+
+        ApixuWeatherApiService.initApi(getString(R.string.API_KEY))
     }
 
 }
