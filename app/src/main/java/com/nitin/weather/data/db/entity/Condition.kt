@@ -1,4 +1,4 @@
-package com.nitin.weather.data.response
+package com.nitin.weather.data.db.entity
 
 data class Condition(
     val code: Int,

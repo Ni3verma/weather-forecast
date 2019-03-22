@@ -1,7 +1,7 @@
 package com.nitin.weather.data
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.nitin.weather.data.response.CurrentWeatherResponse
+import com.nitin.weather.data.network.response.CurrentWeatherResponse
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

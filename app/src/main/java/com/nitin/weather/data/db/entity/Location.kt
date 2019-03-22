@@ -1,4 +1,4 @@
-package com.nitin.weather.data.response
+package com.nitin.weather.data.db.entity
 
 import com.google.gson.annotations.SerializedName
 

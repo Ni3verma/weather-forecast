@@ -1,4 +1,4 @@
-package com.nitin.weather.data.response
+package com.nitin.weather.data.db.entity
 
 import com.google.gson.annotations.SerializedName
 
@@ -21,22 +21,22 @@ data class CurrentWeatherEntry(
     @SerializedName("last_updated_epoch")
     val lastUpdatedEpoch: Int,
     @SerializedName("precip_in")
-    val precipIn: Int,
+    val precipIn: Double,
     @SerializedName("precip_mm")
-    val precipMm: Int,
+    val precipMm: Double,
     @SerializedName("pressure_in")
     val pressureIn: Double,
     @SerializedName("pressure_mb")
-    val pressureMb: Int,
+    val pressureMb: Double,
     @SerializedName("temp_c")
-    val tempC: Int,
+    val tempC: Double,
     @SerializedName("temp_f")
     val tempF: Double,
     val uv: Int,
     @SerializedName("vis_km")
     val visKm: Double,
     @SerializedName("vis_miles")
-    val visMiles: Int,
+    val visMiles: Double,
     @SerializedName("wind_degree")
     val windDegree: Int,
     @SerializedName("wind_dir")
