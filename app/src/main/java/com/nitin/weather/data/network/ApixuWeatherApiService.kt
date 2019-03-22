@@ -1,4 +1,4 @@
-package com.nitin.weather.data
+package com.nitin.weather.data.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.nitin.weather.data.network.response.CurrentWeatherResponse
@@ -21,7 +21,10 @@ interface ApixuWeatherApiService {
     companion object {
         lateinit var API_KEY: String
 
-        operator fun invoke(): ApixuWeatherApiService {
+        //BUG:: for now we are taking in this connectivity interceptor as parameter just to prepare our code. later we will use dependency injection
+        operator fun invoke(
+            connectivityInterceptor: ConnectivityInterceptor
+        ): ApixuWeatherApiService {
             val requestInterceptor = Interceptor { chain ->
                 val url = chain.request()
                     .url()
@@ -39,6 +42,7 @@ interface ApixuWeatherApiService {
 
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(requestInterceptor)
+                .addInterceptor(connectivityInterceptor)
                 .build()
 
             return Retrofit.Builder()
