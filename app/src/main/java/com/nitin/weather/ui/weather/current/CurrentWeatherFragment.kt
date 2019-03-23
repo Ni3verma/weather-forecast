@@ -4,23 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.nitin.weather.R
 import com.nitin.weather.data.network.ApixuWeatherApiService
-import com.nitin.weather.data.network.ConnectivityInterceptorImpl
-import com.nitin.weather.data.network.WeatherNetworkDataSourceImpl
+import com.nitin.weather.ui.base.ScopedFragment
 import kotlinx.android.synthetic.main.current_weather_fragment.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.kodein
+import org.kodein.di.generic.instance
 
-class CurrentWeatherFragment : Fragment() {
+class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
 
-    companion object {
-        fun newInstance() = CurrentWeatherFragment()
-    }
+    override val kodein by kodein()
+    private val viewModelFactory: CurrentWeatherViewModelFactory by instance()
 
     private lateinit var viewModel: CurrentWeatherViewModel
 
@@ -33,21 +31,16 @@ class CurrentWeatherFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(CurrentWeatherViewModel::class.java)
-
-        //BUG:: ONLY TO TEST THAT APP IS WORKING,,, THIS IS NOT A GOOD WAY TO DO THINGS
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(CurrentWeatherViewModel::class.java)
         ApixuWeatherApiService.initApi(getString(R.string.API_KEY))
-        val apiService = ApixuWeatherApiService(ConnectivityInterceptorImpl(this.context!!))
-        val weatherNetworkDataSource = WeatherNetworkDataSourceImpl(apiService)
+        bindUI()
+    }
 
-        weatherNetworkDataSource.downloadedCurrentWeather.observe(
-            this,
-            Observer { text_view.text = it.toString() }
-        )
-
-        //BUG:: SHOULD NEVER BE USED IN PRODUCTION
-        GlobalScope.launch(Dispatchers.Main) {
-            weatherNetworkDataSource.fetchCurrentWeather("India", "en")
-        }
+    //as fragment is extending ScopedFragment and in there we are handling lifecycle events so it is safe to use launch
+    private fun bindUI() = launch {
+        val currentWeather = viewModel.weather.await()
+        currentWeather.observe(this@CurrentWeatherFragment, Observer {
+            text_view.text = it?.toString()
+        })
     }
 }
