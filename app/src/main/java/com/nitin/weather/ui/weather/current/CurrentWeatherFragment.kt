@@ -42,13 +42,14 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
     //as fragment is extending ScopedFragment and in there we are handling lifecycle events so it is safe to use launch
     private fun bindUI() = launch {
         val currentWeather = viewModel.weather.await()
+        val weatherLocation = viewModel.weatherLocation.await()
+
         currentWeather.observe(this@CurrentWeatherFragment, Observer {
             if (it == null) {
                 return@Observer
             }
             Log.d("Nitin", it.toString())
             group_loading.visibility = View.GONE
-            updateLocation("India")
             updateDateToToday()
             updateTemperatures(it.temperature, it.feelsLikeTemp)
             updateCondition(it.conditionText)
@@ -59,6 +60,12 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
             GlideApp.with(this@CurrentWeatherFragment)
                 .load("https:${it.conditionIconUrl}")
                 .into(imageView_condition_icon)
+        })
+
+        weatherLocation.observe(this@CurrentWeatherFragment, Observer { location ->
+            if (location == null) return@Observer
+
+            updateLocation(location.name)
         })
     }
 
