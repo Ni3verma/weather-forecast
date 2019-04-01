@@ -2,6 +2,7 @@ package com.nitin.weather.data.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.nitin.weather.data.network.response.CurrentWeatherResponse
+import com.nitin.weather.data.network.response.FutureWeatherResponse
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -18,10 +19,16 @@ interface ApixuWeatherApiService {
         @Query("lang") languageCode: String = "en"
     ): Deferred<CurrentWeatherResponse>
 
+    @GET("forecast.json")
+    fun getFutureWeather(
+        @Query("q") location: String,
+        @Query("days") days: Int,
+        @Query("lang") languageCode: String = "en"
+    ): Deferred<FutureWeatherResponse>
+
     companion object {
         lateinit var API_KEY: String
 
-        //BUG:: for now we are taking in this connectivity interceptor as parameter just to prepare our code. later we will use dependency injection
         operator fun invoke(
             connectivityInterceptor: ConnectivityInterceptor
         ): ApixuWeatherApiService {

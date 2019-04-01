@@ -6,8 +6,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import com.nitin.weather.data.db.entity.CurrentWeatherEntry
-import com.nitin.weather.data.db.unitlocalized.ImperialCurrentWeatherEntry
-import com.nitin.weather.data.db.unitlocalized.MetricCurrentWeatherEntry
+import com.nitin.weather.data.db.unitlocalized.current.ImperialCurrentWeatherEntry
+import com.nitin.weather.data.db.unitlocalized.current.MetricCurrentWeatherEntry
 
 @Dao
 interface CurrentWeatherDao {

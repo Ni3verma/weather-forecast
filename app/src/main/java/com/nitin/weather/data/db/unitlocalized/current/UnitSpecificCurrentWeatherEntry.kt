@@ -1,4 +1,4 @@
-package com.nitin.weather.data.db.unitlocalized
+package com.nitin.weather.data.db.unitlocalized.current
 
 interface UnitSpecificCurrentWeatherEntry {
     val temperature: Double

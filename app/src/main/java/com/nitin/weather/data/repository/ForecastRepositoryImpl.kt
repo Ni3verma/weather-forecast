@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import com.nitin.weather.data.db.CurrentWeatherDao
 import com.nitin.weather.data.db.WeatherLocationDao
 import com.nitin.weather.data.db.entity.WeatherLocation
-import com.nitin.weather.data.db.unitlocalized.UnitSpecificCurrentWeatherEntry
+import com.nitin.weather.data.db.unitlocalized.current.UnitSpecificCurrentWeatherEntry
 import com.nitin.weather.data.network.WeatherNetworkDataSource
 import com.nitin.weather.data.network.response.CurrentWeatherResponse
 import com.nitin.weather.data.provider.LocationProvider
