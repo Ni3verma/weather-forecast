@@ -13,6 +13,7 @@ import com.nitin.weather.data.provider.UnitProviderImpl
 import com.nitin.weather.data.repository.ForecastRepository
 import com.nitin.weather.data.repository.ForecastRepositoryImpl
 import com.nitin.weather.ui.weather.current.CurrentWeatherViewModelFactory
+import com.nitin.weather.ui.weather.future.list.FutureListWeatherViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -28,6 +29,7 @@ class ForecastApplication : Application(), KodeinAware {
         bind() from singleton { ForecastDatabase(instance()) }
         bind() from singleton { instance<ForecastDatabase>().currentWeatherDao() }
         bind() from singleton { instance<ForecastDatabase>().weatherLocationDao() }
+        bind() from singleton { instance<ForecastDatabase>().futureWeatherDao() }
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
         bind() from singleton { ApixuWeatherApiService(instance()) }
         bind<WeatherNetworkDataSource>() with singleton { WeatherNetworkDataSourceImpl(instance()) }
@@ -38,11 +40,13 @@ class ForecastApplication : Application(), KodeinAware {
                 instance(),
                 instance(),
                 instance(),
+                instance(),
                 instance()
             )
         }
         bind<UnitProvider>() with singleton { UnitProviderImpl(instance()) }
         bind() from provider { CurrentWeatherViewModelFactory(instance(), instance()) }
+        bind() from provider { FutureListWeatherViewModelFactory(instance(), instance()) }
     }
 
     override fun onCreate() {
