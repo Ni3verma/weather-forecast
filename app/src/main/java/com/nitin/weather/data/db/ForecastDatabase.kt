@@ -6,10 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.nitin.weather.data.db.entity.CurrentWeatherEntry
+import com.nitin.weather.data.db.entity.FutureWeatherEntry
 import com.nitin.weather.data.db.entity.WeatherLocation
 
 @Database(
-    entities = [CurrentWeatherEntry::class, WeatherLocation::class],
+    entities = [CurrentWeatherEntry::class, WeatherLocation::class, FutureWeatherEntry::class],
     version = 1
 )
 @TypeConverters(LocalDateConverter::class)
