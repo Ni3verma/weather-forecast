@@ -1,8 +1,8 @@
 package com.nitin.weather.ui.weather.future.list
 
 import com.nitin.weather.R
-import com.nitin.weather.data.db.unitlocalized.future.MetricSimpleFutureWeatherEntry
-import com.nitin.weather.data.db.unitlocalized.future.UnitSpecificSimpleFutureWeatherEntry
+import com.nitin.weather.data.db.unitlocalized.future.list.MetricSimpleFutureWeatherEntry
+import com.nitin.weather.data.db.unitlocalized.future.list.UnitSpecificSimpleFutureWeatherEntry
 import com.nitin.weather.internal.glide.GlideApp
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder

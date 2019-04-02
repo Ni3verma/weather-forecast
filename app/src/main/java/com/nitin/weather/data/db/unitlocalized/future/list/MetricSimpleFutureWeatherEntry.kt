@@ -1,12 +1,12 @@
-package com.nitin.weather.data.db.unitlocalized.future
+package com.nitin.weather.data.db.unitlocalized.future.list
 
 import androidx.room.ColumnInfo
 import org.threeten.bp.LocalDate
 
-data class ImperialSimpleFutureWeatherEntry(
+data class MetricSimpleFutureWeatherEntry(
     @ColumnInfo(name = "date")
     override val date: LocalDate,
-    @ColumnInfo(name = "avgTempF")
+    @ColumnInfo(name = "avgTempC")
     override val avgTemperature: Double,
     @ColumnInfo(name = "condition_text")
     override val conditionText: String,

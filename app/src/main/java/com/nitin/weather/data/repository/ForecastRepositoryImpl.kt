@@ -6,7 +6,8 @@ import com.nitin.weather.data.db.FutureWeatherDao
 import com.nitin.weather.data.db.WeatherLocationDao
 import com.nitin.weather.data.db.entity.WeatherLocation
 import com.nitin.weather.data.db.unitlocalized.current.UnitSpecificCurrentWeatherEntry
-import com.nitin.weather.data.db.unitlocalized.future.UnitSpecificSimpleFutureWeatherEntry
+import com.nitin.weather.data.db.unitlocalized.future.detail.UnitSpecificDetailFutureWeatherEntry
+import com.nitin.weather.data.db.unitlocalized.future.list.UnitSpecificSimpleFutureWeatherEntry
 import com.nitin.weather.data.network.FORECAST_DAYS_COUNT
 import com.nitin.weather.data.network.WeatherNetworkDataSource
 import com.nitin.weather.data.network.response.CurrentWeatherResponse
@@ -55,6 +56,17 @@ class ForecastRepositoryImpl(
             initWeatherData()
             return@withContext if (metric) futureWeatherDao.getSimpleWeatherForecastMetric(startDate)
             else futureWeatherDao.getSimpleWeatherForecastImperial(startDate)
+        }
+    }
+
+    override suspend fun getFutureWeatherByDate(
+        date: LocalDate,
+        metric: Boolean
+    ): LiveData<out UnitSpecificDetailFutureWeatherEntry> {
+        return withContext(Dispatchers.IO) {
+            //            initWeatherData()
+            return@withContext if (metric) futureWeatherDao.getDetailedWeatherByDateMetric(date)
+            else futureWeatherDao.getDetailedWeatherByDateImperial(date)
         }
     }
 
