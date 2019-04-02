@@ -11,7 +11,8 @@ import com.nitin.weather.data.db.entity.WeatherLocation
 
 @Database(
     entities = [CurrentWeatherEntry::class, WeatherLocation::class, FutureWeatherEntry::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 @TypeConverters(LocalDateConverter::class)
 
