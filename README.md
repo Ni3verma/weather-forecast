@@ -25,3 +25,8 @@ It uses following libraries
     <string name="API_KEY">KEY_HERE</string>
 </resources>
 ```
+
+# Screenshots
+<img src="https://github.com/Ni3verma/weather-forecast/blob/master/ss/today.png" alt="Today" width="200px" height="250px">
+<img src="https://github.com/Ni3verma/weather-forecast/blob/master/ss/forecast.png" alt="Forecast" width="200px" height="250px">
+<img src="https://github.com/Ni3verma/weather-forecast/blob/master/ss/settings.png" alt="Settings" width="200px" height="250px">
